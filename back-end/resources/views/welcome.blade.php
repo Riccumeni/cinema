@@ -15,8 +15,31 @@
     <input class="bg-transparent border white text-white ml-4" placeholder="SELEZIONA UN ORARIO">
   </div>
   <div class="m-5">
-    <h1 class="text-4xl inline-block align-baseline text-secondary">PROGRAMMAZIONE</h1>
-    <div class="bg-secondary h-5 w-1/2"></div>
+    <h1 class="text-4xl tracking-widest inline-block align-baseline text-secondary">PROGRAMMAZIONE</h1>
+    <div class="px-4 bg-secondary h-10 w-4/5 flex justify-start gap-x-5">
+      <button class="text-white text-[12px] focus:border-b-2 white">NELLE SALE</button>
+      <button class="text-white text-[12px] focus:border-b-2 white">IN ARRIVO</button>
+    </div>
+    <div class="mt-8 flex gap-4">
+      <div class="bg-white-200 border white bg-grey h-56 w-40"></div>
+      <div class="bg-white-200 border white bg-grey h-56 w-40"></div>
+      <div class="bg-white-200 border white bg-grey h-56 w-40"></div>
+      <div class="bg-white-200 border white bg-grey h-56 w-40"></div>
+      <div class="bg-white-200 border white bg-grey h-56 w-40"></div>
+      <div class="bg-white-200 border white bg-grey h-56 w-40"></div>
+    </div>
+    <div class="mt-8">
+      <h1 class="text-4xl tracking-widest inline-block align-baseline text-secondary">LA NOSTRA APP</h1>
+      <div class="px-4 bg-secondary h-10 w-4/5 flex justify-start gap-x-5"></div>
+      <div class="bg-black w-4/5 h-96 pt-10 flex justify-evenly">
+        <div class="border white h-full w-1/4"></div>
+        <div>
+          <h1 class="text-2xl text-white font-serif">Scopri l'App del nostro cinema</h1>
+          <h1 class="pt-4 text-lg text-white font-sans">Potrai prenotare i tuoi spettacoli direttamente dallo smartphone.</h1>
+          <button class="bg-secondary text-white p-2 rounded mt-4">Download</button>
+        </div>
+      </div>
+    </div>
   </div>
 </body>
 </html>
