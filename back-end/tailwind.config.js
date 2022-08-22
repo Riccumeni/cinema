@@ -11,6 +11,9 @@ module.exports = {
         'navbar' : '#002C57',
         'body' : '#001C38',
         'secondary' : "#4991FE"
+      },
+      height: {
+        
       }
     },
   },

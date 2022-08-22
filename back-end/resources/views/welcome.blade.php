@@ -6,10 +6,10 @@
   @vite('resources/css/app.css')
 </head>
 <body class="bg-body">
-  <div class="bg-navbar h-12 p-5 flex justify-between items-center">
+  <nav class="sticky top-0 z-50 bg-navbar h-12 p-5 flex justify-between items-center">
     <h2 class="text-xl text-white">Cinema</h2>
-    <h2 class="text-xl text-white">Login</h2>
-  </div>
+    <h2 class="text-xl text-white hover:underline cursor-pointer">Login</h2>
+  </nav>
   <div class="m-5">
     <input class="bg-transparent border white text-white" placeholder="SELEZIONA UN FILM">
     <input class="bg-transparent border white text-white ml-4" placeholder="SELEZIONA UN ORARIO">
