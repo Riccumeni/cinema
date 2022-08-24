@@ -14,3 +14,20 @@ export const register = async (req, res) => {
     }
     res.json({"success" : true, "message" : "utente registrato con successo"})
 }
+
+export const login = async (req, res) => {
+    const {email, password} = req.body;
+    let id = -1;
+
+    try{
+        await connection.query(`select codice from utente where email=${email} and password=${password}`, (err, result) => {
+            if (err){
+                return;
+            }
+            id = result[0]["codice"];
+        })
+    }catch(error){
+        res.status(404).json({"message" : error.message})
+    }
+    res.json({"success" : true, "id" : id})
+}
