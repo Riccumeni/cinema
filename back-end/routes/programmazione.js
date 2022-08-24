@@ -1,5 +1,6 @@
 import express, { Router } from 'express';
 import connection from '../index.js';
+import {ricerca} from '../controllers/programmazione.js'
 
 const router = express.Router();
 
@@ -15,5 +16,6 @@ router.get('/:id', (req, res) => {
         res.json(results);
     })
 })
+
 
 export default router;
