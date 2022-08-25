@@ -26,7 +26,8 @@ const connection = mysql.createConnection({
     user     : 'root',
     password : 'root',
     database : 'cinema',
-    port     : 8889
+    port     : 8889,
+    multipleStatements: true
 });
 
 connection.connect((err) => {
