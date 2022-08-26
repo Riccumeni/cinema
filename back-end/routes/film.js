@@ -8,7 +8,11 @@ router.get('/:name', (req, res) => {
     const {name} = req.params;
     const nameWithoutDash = name.replace('-', ' ');
     
-    connection.query(`select * from film where nome like '${nameWithoutDash}';select * from spettacolo where nomefilm like '${nameWithoutDash}' and spettacolo.iniziofilm > current_date;`, (err, results) => {
+    connection.query(`select * from film where nome like '${nameWithoutDash}';
+    select spettacolo.codice, spettacolo.nomefilm, spettacolo.iniziofilm, spettacolo.finefilm, spettacolo.codicesala, sala.numeroposti, sala.numeroposti - count(prenotazione.codicespettacolo)  as "posti disponibili"
+    from spettacolo, sala, prenotazione
+    where (sala.codice = spettacolo.codicesala and spettacolo.codice = prenotazione.codicespettacolo) and  spettacolo.iniziofilm > current_date
+    group by spettacolo.codice;`, (err, results) => {
         if(err) throw err;
 
         let film = results[0][0];
@@ -18,9 +22,23 @@ router.get('/:name', (req, res) => {
     });
 })
 
-router.get('/prenota/:codiceSpettacolo', verifyLogIn, (req, res) => {
+router.get('/:name/:codiceSpettacolo', verifyLogIn, (req, res) => {
+    const {codiceSpettacolo} = req.params
+    const id = req.cookies['id'];
 
-    
+    connection.query(`select sala.numeroposti - count(prenotazione.codicespettacolo) as 'postidisponibili' from sala, prenotazione, spettacolo where (sala.codice = spettacolo.codicesala and spettacolo.codice = prenotazione.codicespettacolo) and spettacolo.codice = ${codiceSpettacolo}`, (err, results) => {
+        if(err) throw err;
+
+        if(results[0]['postidisponibili']  <= 0){
+            res.json({'message' : 'spettacolo pieno!'})
+        }else{
+            connection.query(`insert into prenotazione (codiceutente, codicespettacolo) values ('${id}', '${codiceSpettacolo}')`, (err) => {
+                if(err) throw err;
+                console.log('query successfull!');
+            })
+            res.status(200).json({'message' : 'prenotato con successo!'})
+        }
+    })
 })
 
 export default router;

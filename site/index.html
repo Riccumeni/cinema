@@ -3,30 +3,34 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  @vite('resources/css/app.css')
+  <link href="./dist/output.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/flowbite@1.5.2/dist/flowbite.min.css" />
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 </head>
-<body class="bg-body">
-  <nav class="sticky top-0 z-50 bg-navbar h-12 p-5 flex justify-between items-center">
+<body class="bg-[#001C38] text-white">
+  <nav class="sticky top-0 z-50 bg-[#002C57] h-12 p-5 flex justify-between items-center">
     <h2 class="text-xl text-white">Cinema</h2>
-    @if (Auth::check())
-    <div class="flex gap-2">
-      <h2 class="text-xl text-white">{{ Auth::user()->name }}</h2>
-      <form method="POST" action="{{route('logout')}}">
-        <h2 class="text-xl text-white hover:underline cursor-pointer">Logout</h2>
-      </form>
+<button id="login" class="text-white w-20 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">Login</button>
+
+<!--
+<button id="dropdownDefault" data-dropdown-toggle="dropdown" class="flex justify-between text-white w-44 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">username<svg class="ml-2 w-4 h-4" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></button>
+
+<div id="dropdown" class="z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 block" data-popper-reference-hidden="" data-popper-escaped="" data-popper-placement="bottom" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate3d(327px, 70px, 0px);">
+    <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefault">
+      <li>
+        <a href="#" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Logout</a>
+      </li>
+    </ul>
+</div> -->
     </div>
-      
-    @else 
-      <h2 class="text-xl text-white hover:underline cursor-pointer" onclick="window.location='http://localhost:8000/login'">Login</h2>
-    @endif
   </nav>
   <div class="m-5">
-  <input class="bg-transparent border white text-white" placeholder="SELEZIONA UN FILM">
-    <input class="bg-transparent border white text-white ml-4" placeholder="SELEZIONA UN ORARIO">
+    <input class="bg-transparent border white text-white p-2" placeholder="SELEZIONA UN FILM">
+    <input class="bg-transparent border white text-white ml-4 p-2" placeholder="SELEZIONA UN ORARIO">
   </div>
   <div class="m-5">
-    <h1 class="text-4xl tracking-widest inline-block align-baseline text-secondary">PROGRAMMAZIONE</h1>
-    <div class="px-4 bg-secondary h-10 w-4/5 flex justify-start gap-x-5">
+    <h1 class="text-4xl tracking-widest inline-block align-baseline text-[#4991FE]">PROGRAMMAZIONE</h1>
+    <div class="px-4 bg-secondary h-10 w-4/5 flex justify-start gap-x-5  bg-[#4991FE]">
       <button class="text-white text-[12px] focus:border-b-2 white">NELLE SALE</button>
       <button class="text-white text-[12px] focus:border-b-2 white">IN ARRIVO</button>
     </div>
@@ -39,8 +43,8 @@
       <div class="border white bg-grey h-56 w-40"></div>
     </div>
     <div class="mt-8">
-      <h1 class="text-4xl tracking-widest inline-block align-baseline text-secondary">LA NOSTRA APP</h1>
-      <div class="px-4 bg-secondary h-10 w-4/5 flex justify-start gap-x-5"></div>
+      <h1 class="text-4xl tracking-widest inline-block align-baseline text-[#4991FE]">LA NOSTRA APP</h1>
+      <div class="px-4 bg-[#4991FE] h-10 w-4/5 flex justify-start gap-x-5"></div>
       <div class="bg-black w-4/5 h-96 pt-10 flex justify-evenly">
         <div class="border white h-full w-1/4"></div>
         <div>
@@ -51,5 +55,7 @@
       </div>
     </div>
   </div>
+  <script src="https://unpkg.com/flowbite@1.5.2/dist/flowbite.js"></script>
+  <script src="./script/home.js"></script>
 </body>
 </html>

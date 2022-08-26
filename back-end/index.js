@@ -36,19 +36,12 @@ connection.connect((err) => {
         return;
     }
 
-    console.log("connected");
+    console.log("DB: connected");
 })
 
 app.get('/', (req, res) => {
     res.json({"success" : true})
 })
-
-/*
-connection.query('SELECT 1 + 1 AS solution', function (error, results, fields) {
-    if (error) throw error;
-    console.log('The solution is: ', results[0].solution);
-});
-*/
 
 app.listen(PORT, () => {
     console.log(`Server running on port: ${PORT}`);

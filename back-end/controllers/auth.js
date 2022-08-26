@@ -22,7 +22,7 @@ export const register = async (req, res) => {
 export const login = async (req, res) => {
     const {email, password} = req.body;
     let id = -1;
-
+    console.log('helo');
     if(!email || !password){
         res.json({"success" : false, "message" : "inserire le credenziali"})
     }
