@@ -20,22 +20,28 @@ export const register = async (req, res) => {
 }
 
 export const login = async (req, res) => {
-    const {email, password} = req.body;
+    const account = req.body;
+    const email = account['email'];
+    const password = account['password']
+    console.log(account);
     let id = -1;
-    console.log('helo');
+    let nome
+    console.log(`Email: ${account['email']}, Password: ${account['password']}`);
     if(!email || !password){
         res.json({"success" : false, "message" : "inserire le credenziali"})
     }
 
     try{
-        await connection.query(`select codice, password from utente where email like '${email}'`, (error, results) => {
+        await connection.query(`select codice, nome, password from utente where email like '${email}'`, (error, results) => {
             if (error){
                 return;
             }
             let passwordHashed = results[0]['password'];
             if(bcrypt.compare(password, passwordHashed)){
                 id = results[0]["codice"];
+                nome = results[0]["nome"];
                 res.cookie('id', id)
+                res.cookie('name', nome)
                 res.json({"success" : true})
             }else{
                 res.status(200).json({"message" : "credenziali non corrette"})
