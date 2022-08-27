@@ -5,7 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link href="./dist/output.css" rel="stylesheet">
+    <link href="/login/css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 </head>
 <body class="bg-[#001C38] text-white">
     <nav class="sticky top-0 z-50 bg-[#002C57] h-12 p-5 flex justify-between items-center">
@@ -13,14 +14,15 @@
     </nav>
     <div class="flex justify-evenly pt-20">
         <div class="bg-blue-700 w-[30rem] h-auto p-6 rounded-xl">
-            <form method="POST" action="http://localhost:3000/auth/login">
+            
                 <h2 >Email:</h2>
-                <input type="text" name="email" class="p-1 mt-2 w-[18rem] text-black rounded"/>
+                <input type="email" id="email" class="p-1 mt-2 w-[18rem] text-black rounded"/>
                 <h2 class="mt-2">Password:</h2>
-                <input type="password" name="password" class="p-1 mt-2 w-[18rem] text-black rounded"/><br>
-                <input type="submit" class="mt-2 p-2 w-[4rem] bg-blue-900 rounded hover:cursor-pointer"/>
-            </form>
+                <input type="password" id="password" class="p-1 mt-2 w-[18rem] text-black rounded"/><br>
+                <input type="submit" onclick="login()" class="mt-2 p-2 w-[4rem] bg-blue-900 rounded hover:cursor-pointer"/>
+            
         </div>
     </div>
+    <script src="/login/js"></script>
 </body>
 </html>
