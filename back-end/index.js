@@ -24,7 +24,7 @@ app.use(cookieParser())
 app.use('/users', userRoutes); 
 app.use('/programmazione', programmazioneRoutes); 
 app.use('/auth', authRoutes); 
-app.use('/film', filmRoutes);
+app.use('/api/film', filmRoutes);
 
 const connection = mysql.createConnection({
     host     : 'localhost',
@@ -68,11 +68,12 @@ app.get('/login/js', (req, res) => {
     res.sendFile("/Users/rikku/Documents/cinema/site/script/login.js")
 })
 
-app.get('/get', (req, res) => {
-    connection.query("select locandina from film where nome='sono tornato'", (err, results) => {
-        if(err) throw err;
-        res.sendFile(`/Users/rikku/Documents/cinema/back-end/public/img/locandine/${results[0]['locandina']}`)
-    })
+app.get('/film/:name', (req, res) => {
+    res.sendFile('/Users/rikku/Documents/cinema/site/film.html')
+})
+
+app.get('/script/film', (req, res) => {
+    res.sendFile('/Users/rikku/Documents/cinema/site/script/film.js')
 })
 
 app.get('/img/:name', (req, res) => {

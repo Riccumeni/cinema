@@ -14,7 +14,7 @@ $(document).ready(function(){
         console.log(myObj);
         
         for (let i = 0; i < Object.keys(myObj).length; i++) {
-            $('#film').append(`<img class="h-70 w-56" src="http://localhost:3000/film/img/${myObj[i].locandina}" alt="sono tornato"">`);
+            $('#film').append(`<a href="/film/${myObj[i].nomefilm}"><img class="h-70 w-56" src="http://localhost:3000/api/film/img/${myObj[i].locandina}" alt="sono tornato""></a>`);
         }
         
     }

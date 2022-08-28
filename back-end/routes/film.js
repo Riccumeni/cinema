@@ -27,7 +27,7 @@ router.get('/img/:name', (req, res) => {
     res.sendFile(`/Users/rikku/Documents/cinema/back-end/public/img/locandine/${name}`)
 })
 
-router.get('/:name/:codiceSpettacolo', verifyLogIn, (req, res) => {
+router.get('/:name/ee:codiceSpettacolo', verifyLogIn, (req, res) => {
     const {codiceSpettacolo} = req.params
     const id = req.cookies['id'];
 
@@ -45,7 +45,5 @@ router.get('/:name/:codiceSpettacolo', verifyLogIn, (req, res) => {
         }
     })
 })
-
-
 
 export default router;
