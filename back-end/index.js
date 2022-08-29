@@ -5,6 +5,7 @@ import cookieParser from 'cookie-parser';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import fetch from 'node-fetch'
+import wiki from 'wikijs'
 
 import userRoutes from './routes/users.js'
 import programmazioneRoutes from './routes/programmazione.js'

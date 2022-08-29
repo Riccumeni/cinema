@@ -33,19 +33,21 @@ export const login = async (req, res) => {
 
     try{
         await connection.query(`select codice, nome, password from utente where email like '${email}'`, (error, results) => {
-            if (error){
-                return;
+            try{
+                let passwordHashed = results[0]['password'];
+                if(bcrypt.compare(password, passwordHashed)){
+                    id = results[0]["codice"];
+                    nome = results[0]["nome"];
+                    res.cookie('id', id)
+                    res.cookie('name', nome)
+                    res.json({"success" : true})
+                }else{
+                    res.status(200).json({"message" : "credenziali non corrette"})
+                }  
+            }catch(error){
+                res.json({'success' : false, 'message' : 'credenziali non corrette'})
             }
-            let passwordHashed = results[0]['password'];
-            if(bcrypt.compare(password, passwordHashed)){
-                id = results[0]["codice"];
-                nome = results[0]["nome"];
-                res.cookie('id', id)
-                res.cookie('name', nome)
-                res.json({"success" : true})
-            }else{
-                res.status(200).json({"message" : "credenziali non corrette"})
-            }  
+            
         })
     }catch(error){
         res.status(404).json({"message" : error.message})

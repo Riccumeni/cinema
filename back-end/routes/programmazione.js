@@ -5,7 +5,9 @@ import {ricerca} from '../controllers/programmazione.js'
 const router = express.Router();
 
 router.get('/', (req, res) => {
-    connection.query('select spettacolo.codice, film.locandina, spettacolo.nomefilm, spettacolo.iniziofilm, spettacolo.finefilm from spettacolo, film where spettacolo.nomefilm = film.nome and spettacolo.iniziofilm > current_date;', (err, results) => {
+    connection.query(`select distinct film.locandina, spettacolo.nomefilm 
+    from spettacolo, film 
+    where spettacolo.nomefilm = film.nome and spettacolo.iniziofilm > current_date;`, (err, results) => {
         res.json(results);
     })
 })
