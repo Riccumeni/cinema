@@ -9,25 +9,19 @@ router.get('/:name', (req, res) => {
     const nameWithoutDash = name.replace('-', ' ');
     
     connection.query(`select * from film where nome like '${nameWithoutDash}';
-    select spettacolo.codice, spettacolo.nomefilm, spettacolo.iniziofilm, spettacolo.finefilm, spettacolo.codicesala, sala.numeroposti, sala.numeroposti - count(prenotazione.codicespettacolo)  as "postidisponibili"
-    from spettacolo, sala, prenotazione
-    where (sala.codice = spettacolo.codicesala and spettacolo.codice = prenotazione.codicespettacolo) and spettacolo.nomefilm='${nameWithoutDash}' and  spettacolo.iniziofilm > current_date
-    group by spettacolo.codice;
-    select spettacolo.codice, spettacolo.nomefilm, spettacolo.iniziofilm, spettacolo.finefilm, spettacolo.codicesala, sala.numeroposti as 'postidisponibili'
-    from sala, spettacolo
-    where spettacolo.codicesala = sala.codice and spettacolo.nomefilm='${nameWithoutDash}' and spettacolo.iniziofilm > current_date
-    group by spettacolo.codice`, (err, results) => {
+    select sala.codice as 'codicesala', spettacolo.codice, spettacolo.nomefilm, spettacolo.iniziofilm, spettacolo.finefilm, sala.numeroposti, sala.numeroposti - count(prenotazione.codiceutente)  as "postidisponibili"
+    from prenotazione
+    right join spettacolo on prenotazione.codicespettacolo = spettacolo.codice
+    inner join sala on sala.codice = spettacolo.codicesala
+    where spettacolo.nomefilm='${nameWithoutDash}' and  spettacolo.iniziofilm > current_date
+    group by spettacolo.codice;`, (err, results) => {
         if(err) throw err;
 
         let film = results[0][0];
 
-        let spettacoli;
+        let spettacoli = results[1];
 
-        if(results[0][1] == null){
-            spettacoli = results[2];
-        }else{
-            spettacoli = results[1];
-        }
+        console.log('film: ' + results);
         
         res.json({"success" : true, "film" : film, "spettacoli" : spettacoli})
     });

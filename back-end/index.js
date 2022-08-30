@@ -5,7 +5,6 @@ import cookieParser from 'cookie-parser';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import fetch from 'node-fetch'
-import wiki from 'wikijs'
 
 import userRoutes from './routes/users.js'
 import programmazioneRoutes from './routes/programmazione.js'
@@ -80,6 +79,12 @@ app.get('/script/film', (req, res) => {
 app.get('/img/:name', (req, res) => {
     const {name} = req.params
     res.sendFile(`/Users/rikku/Documents/cinema/back-end/public/img/${name}`)
+})
+
+app.get('/wiki', async (req, res) => {
+    const response = await fetch('https://it.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&exlimit=1&titles=naruto&explaintext=1&exsectionformat=plain')
+    const json = await response.json()
+    res.json(json['query']['pages'])
 })
 
 app.listen(PORT, () => {

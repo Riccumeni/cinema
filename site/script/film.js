@@ -14,6 +14,7 @@ $(document).ready(function(){
 
         $('#locandina').append(`<img src="http://localhost:3000/api/film/img/${film['locandina']}">`)
         $('#trama').text(film['trama'])
+        $('#trama').append(`<a class="text-white cursor-pointer hover:text-blue-300"> [...]</a>`)
         $('#titolo').text(titolo)
         $('#trailer').attr('src', `${film['trailer']}`)
 
@@ -23,7 +24,7 @@ $(document).ready(function(){
                 <td class="border border-slate-500 p-2">${spettacolo['codicesala']}</td>
                 <td class="border border-slate-500 p-2">${timeWithSpace(spettacolo['iniziofilm'])}</td>
                 <td class="border border-slate-500 p-2">${spettacolo['postidisponibili']}</td>
-                <td class="border border-slate-500 p-2 hover:underline cursor-pointer"><a id="s_${spettacolo['codice']}">Clicca qui</a></td>
+                <td class="border border-slate-500 p-2 hover:underline cursor-pointer"><button onclick="prenota(${spettacolo['codice']})" class="hover:text-cyan-400 underline">Clicca qui</button></td>
             </tr>
             `)
         });
@@ -39,4 +40,22 @@ function timeWithSpace(time){
     time = time.substring(0, time.length - 5)
 
     return time
+}
+
+function prenota(nomespettacolo){
+
+    const nomefilm = window.location.pathname.split("/").pop();
+
+    const xmlhttp = new XMLHttpRequest()
+
+    xmlhttp.onload = function(){
+        const response = JSON.parse(this.responseText);
+        if(xmlhttp.status == 200){
+            alert(response['message'])
+            location.reload()
+        }
+    }
+
+    xmlhttp.open("GET", `/api/film/${nomefilm}/${nomespettacolo}`);
+    xmlhttp.send();
 }
