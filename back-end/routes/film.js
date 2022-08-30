@@ -27,6 +27,16 @@ router.get('/:name', (req, res) => {
     });
 })
 
+router.get('/search/:name', (req, res) => {
+    const {name} = req.params
+    connection.query(`select nome, locandina from film where nome like '${name}%' order by nome`, (err, results) => {
+      if(err){
+        res.status(500).json({'message': 'errore'})
+      }
+      res.status(200).json({'data' : results})  
+    })
+})
+
 router.get('/img/:name', (req, res) => {
     const {name} = req.params
     res.sendFile(`/Users/rikku/Documents/cinema/back-end/public/img/locandine/${name}`)

@@ -7,9 +7,9 @@ import { fileURLToPath } from 'url';
 import fetch from 'node-fetch'
 
 import userRoutes from './routes/users.js'
-import programmazioneRoutes from './routes/programmazione.js'
 import authRoutes from './routes/auth.js'
 import filmRoutes from './routes/film.js'
+import siteRoutes from './routes/site.js'
 
 const app = express();
 const PORT = 3000;
@@ -22,9 +22,9 @@ app.use(cors())
 app.use(cookieParser())
 
 app.use('/users', userRoutes); 
-app.use('/programmazione', programmazioneRoutes); 
 app.use('/auth', authRoutes); 
 app.use('/api/film', filmRoutes);
+app.use('/', siteRoutes)
 
 const connection = mysql.createConnection({
     host     : 'localhost',
@@ -44,42 +44,15 @@ connection.connect((err) => {
     console.log("DB: connected");
 })
 
-app.get('/', (req, res) => {
-    // res.sendFile(__dirname + '/site/index.html')
-    console.log('./site/index.html');
-    res.sendFile('/Users/rikku/Documents/cinema/site/index.html')
+app.get('/api/palinsesto', (req, res) => {
+    connection.query(`select distinct film.locandina, spettacolo.nomefilm 
+    from spettacolo, film 
+    where spettacolo.nomefilm = film.nome and spettacolo.iniziofilm > current_date;`, (err, results) => {
+        res.json(results);
+    })
 })
 
-app.get('/style.css', function(req, res) {
-    res.sendFile("/Users/rikku/Documents/cinema/site/dist/output.css");
-});
 
-app.get('/home.js', function(req, res) {
-    res.sendFile("/Users/rikku/Documents/cinema/site/script/home.js");
-});
-
-app.get('/login', (req, res) => {
-    res.sendFile("/Users/rikku/Documents/cinema/site/login.html")
-})
-app.get('/login/css', (req, res) => {
-    res.sendFile("/Users/rikku/Documents/cinema/site/dist/output.css")
-})
-app.get('/login/js', (req, res) => {
-    res.sendFile("/Users/rikku/Documents/cinema/site/script/login.js")
-})
-
-app.get('/film/:name', (req, res) => {
-    res.sendFile('/Users/rikku/Documents/cinema/site/film.html')
-})
-
-app.get('/script/film', (req, res) => {
-    res.sendFile('/Users/rikku/Documents/cinema/site/script/film.js')
-})
-
-app.get('/img/:name', (req, res) => {
-    const {name} = req.params
-    res.sendFile(`/Users/rikku/Documents/cinema/back-end/public/img/${name}`)
-})
 
 app.get('/wiki', async (req, res) => {
     const response = await fetch('https://it.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&exlimit=1&titles=naruto&explaintext=1&exsectionformat=plain')

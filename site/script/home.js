@@ -20,13 +20,22 @@ $(document).ready(function(){
         }
         
     }
-    xmlhttp.open("GET", "/programmazione");
+    xmlhttp.open("GET", "/api/palinsesto");
     xmlhttp.send();
 })
 
 $("#logout").click(function(){
     deleteAllCookies();
 })
+
+$('#search').keypress(function(event){
+    var keycode = (event.keyCode ? event.keyCode : event.which);
+    const text = $('#search').val()
+
+    if(keycode == '13'){
+      window.location.href = `http://localhost:3000/search/${text}` 
+    }
+  });
 
 function getCookie(name) {
     const value = `; ${document.cookie}`;
