@@ -22,7 +22,7 @@ $('#profilo').click(function(){
     }).then((result) => result.json())
     .then((json) => {
         $('#container').append(`
-        <div class="flex flex-col gap-2">
+        <div class="flex flex-col gap-4">
         <div class="flex gap-2">
         <h2 class="text-2xl">Nome: </h2>
         <h2 class="text-2xl self-center">${json['nome']}</h2>
@@ -47,6 +47,13 @@ $('#profilo').click(function(){
 
 $('#prenotazioni').click(function(){
     $('#container').empty()
+    // fetch(`http://localhost:3000/users/${getCookie('id')}`, {
+    //     method: 'POST', // or 'PUT'
+    //     headers: {
+    //         'Content-Type': 'application/json',
+    //     },
+    // })
+
 })
 
 function timeWithSpace(time){

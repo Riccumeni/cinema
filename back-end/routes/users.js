@@ -17,4 +17,11 @@ router.post('/:id', (req, res) => {
     })
 })
 
+router.post('/prenotazioni', (req, res) => {
+    const {id} = req.body
+    connection.query(`select nomefilm, iniziofilm from spettacolo, prenotazione where prenotazione.codicespettacolo = spettacolo.codice and iniziofilm > current_date`, (err, results) => {
+        res.json(results[0])
+    })
+})
+
 export default router;
