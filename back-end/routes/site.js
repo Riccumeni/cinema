@@ -1,4 +1,5 @@
 import express, { Router } from 'express';
+import { verifyLogIn } from '../middlewares/auth.js';
 
 const router = express.Router();
 
@@ -27,6 +28,14 @@ router.get('/search/:name', (req, res) => {
 router.get('/login', (req, res) => {
     res.sendFile("/Users/rikku/Documents/cinema/site/login.html")
 })
+router.get('/impostazioni', verifyLogIn, (req, res) => {
+    res.sendFile("/Users/rikku/Documents/cinema/site/impostazioni.html")
+})
+
+router.get('/script/impostazioni', verifyLogIn, (req, res) => {
+    res.sendFile("/Users/rikku/Documents/cinema/site/script/impostazioni.js")
+})
+
 router.get('/login/css', (req, res) => {
     res.sendFile("/Users/rikku/Documents/cinema/site/dist/output.css")
 })
@@ -46,5 +55,6 @@ router.get('/img/:name', (req, res) => {
     const {name} = req.params
     res.sendFile(`/Users/rikku/Documents/cinema/back-end/public/img/${name}`)
 })
+
 
 export default router

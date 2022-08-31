@@ -16,11 +16,14 @@
     <div id="dropdown" class="z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 block" data-popper-reference-hidden="" data-popper-escaped="" data-popper-placement="bottom" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate3d(327px, 70px, 0px);"><ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefault">
       <ul>
         <li>
+          <a id="impostazioni" href="#" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Impostazioni</a>
+        </li>
+        <li>
           <a id="logout" href="#" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Logout</a>
         </li>
+        
       </ul>
     </div>
-
   </nav>
   <div class="m-5">
     <input id="search" type="textbox" class="bg-transparent border white text-white p-2" placeholder="SELEZIONA UN FILM">
@@ -32,8 +35,8 @@
       <button class="text-white text-[12px] focus:border-b-2 white">NELLE SALE</button>
       <button class="text-white text-[12px] focus:border-b-2 white">IN ARRIVO</button>
     </div>
-    <div id="film" class="mt-8 flex gap-8 w-a overflow-x-scroll">
-      
+    <div id="film" class="container mt-8 flex flex-nowrap gap-8 h-2/5 w-3/5 overflow-x-scroll">
+      <!-- <a href="/film/${myObj[i].nomefilm}"><img class="min-h-[308px] min-w-[210px] transform transition duration-500 hover:scale-110" src="http://localhost:3000/api/film/img/sono-tornato.jpeg" alt="sono tornato""></a>  -->
     </div>
     <div class="mt-8">
       <h1 class="text-4xl tracking-[.50rem] inline-block align-baseline text-[#4991FE]">LA NOSTRA APP</h1>

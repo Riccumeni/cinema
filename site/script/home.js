@@ -16,7 +16,7 @@ $(document).ready(function(){
         console.log(myObj);
         
         for (let i = 0; i < Object.keys(myObj).length; i++) {
-            $('#film').append(`<a href="/film/${myObj[i].nomefilm}"><img class="h-70 w-56" src="http://localhost:3000/api/film/img/${myObj[i].locandina}" alt="sono tornato""></a>`);
+            $('#film').append(`<a href="/film/${myObj[i].nomefilm}"><img class="min-h-[308px] min-w-[210px] transform transition duration-500 hover:scale-110" src="http://localhost:3000/api/film/img/${myObj[i].locandina}" alt="sono tornato""></a>`);
         }
         
     }
@@ -26,6 +26,10 @@ $(document).ready(function(){
 
 $("#logout").click(function(){
     deleteAllCookies();
+})
+
+$("#impostazioni").click(function(){
+    window.location.href = '/impostazioni'
 })
 
 $('#search').keypress(function(event){

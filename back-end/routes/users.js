@@ -9,10 +9,10 @@ router.get('/', (req, res) => {
     })
 })
 
-router.get('/:id', (req, res) => {
+router.post('/:id', (req, res) => {
     const {id} = req.params;
 
-    connection.query(`select * from utente where codice=${id}`, (err, results) => {
+    connection.query(`select nome, cognome, email, datanascita from utente where codice=${id}`, (err, results) => {
         res.json(results[0]);
     })
 })

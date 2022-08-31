@@ -5,6 +5,7 @@ import cookieParser from 'cookie-parser';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import fetch from 'node-fetch'
+import qrcode from 'qrcode'
 
 import userRoutes from './routes/users.js'
 import authRoutes from './routes/auth.js'
@@ -58,6 +59,28 @@ app.get('/wiki', async (req, res) => {
     const response = await fetch('https://it.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&exlimit=1&titles=naruto&explaintext=1&exsectionformat=plain')
     const json = await response.json()
     res.json(json['query']['pages'])
+})
+
+app.get('/qr', async (req, res) => {
+    const data = {
+        name: 'alessandro',
+        spettacolo: 4
+    }
+
+    let json = JSON.stringify(data)
+
+    qrcode.toString(json,{type:'svg'}, function (err, url) {
+        if(err) return console.log("error occured")
+        console.log(url)
+        res.send(url)
+    })
+
+    qrcode.toDataURL(json, function (err, url) {
+        if(err) return console.log("error occured")
+        console.log(url)
+    })
+
+    res.status(200)
 })
 
 app.listen(PORT, () => {

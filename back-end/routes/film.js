@@ -61,4 +61,15 @@ router.get('/:name/:codiceSpettacolo', verifyLogIn, (req, res) => {
     })
 })
 
+router.get('/spettacoli/getDate/:nome', (req, res) => {
+    const {nome} = req.params
+    console.log(nome);
+    connection.query(`select DAY(spettacolo.iniziofilm) as 'day', MONTH(spettacolo.iniziofilm) as 'month' from spettacolo where spettacolo.nomefilm = '${nome}' and spettacolo.iniziofilm > current_date limit 3`, (err, results) => {
+        if(err){
+            res.status(500)
+        }
+        res.json(results)
+    })
+})
+
 export default router;
