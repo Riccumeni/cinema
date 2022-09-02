@@ -69,7 +69,7 @@ app.get('/qr', async (req, res) => {
 
     let json = JSON.stringify(data)
 
-    qrcode.toString(json,{type:'svg'}, function (err, url) {
+    qrcode.toString(json,{type:'svgf'}, function (err, url) {
         if(err) return console.log("error occured")
         console.log(url)
         res.send(url)
