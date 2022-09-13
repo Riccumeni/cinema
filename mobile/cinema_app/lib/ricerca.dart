@@ -19,30 +19,7 @@ class _RicercaState extends State<Ricerca> {
       child: Column(
         children: [
           Container(
-            child: Column(
-              children: [
-                Row(
-                  children: const [
-                    Text(
-                      'Cerca',
-                      style: TextStyle(
-                          fontSize: 24, color: Colors.white, letterSpacing: 2),
-                    ),
-                    SizedBox(width: 10),
-                    Icon(
-                      Icons.schedule,
-                      color: Colors.white,
-                    )
-                  ],
-                ),
-                const Divider(
-                  color: Colors.grey,
-                ),
-              ],
-            ),
-          ),
-          Container(
-              padding: EdgeInsets.only(top: 10),
+              padding: EdgeInsets.only(top: 30),
               child: SizedBox(
                 width: 350,
                 child: TextField(

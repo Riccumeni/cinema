@@ -16,31 +16,6 @@ class Palinsesto extends StatelessWidget {
         margin: const EdgeInsets.only(top: 60.0, left: 30.0, right: 30),
         child: Column(
           children: [
-            Container(
-              child: Column(
-                children: [
-                  Row(
-                    children: const [
-                      Text(
-                        'Palinsesto',
-                        style: TextStyle(
-                            fontSize: 24,
-                            color: Colors.white,
-                            letterSpacing: 2),
-                      ),
-                      SizedBox(width: 10),
-                      Icon(
-                        Icons.schedule,
-                        color: Colors.white,
-                      )
-                    ],
-                  ),
-                  const Divider(
-                    color: Colors.grey,
-                  ),
-                ],
-              ),
-            ),
             Expanded(
               child: FutureBuilder(
                 future: req.get(url: 'http://localhost:3000/api/palinsesto'),

@@ -18,14 +18,14 @@ class MyApp extends StatelessWidget {
 
 class MyStatefulWidget extends StatefulWidget {
   const MyStatefulWidget({super.key});
-
   @override
   State<MyStatefulWidget> createState() => _MyStatefulWidgetState();
 }
 
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
-  int index = 1;
-
+  int index = 2;
+  String _title = "Palinsesto";
+  var _icon = Icons.schedule;
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   final pages = [
@@ -37,12 +37,50 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   void _onItemTapped(int index) {
     setState(() {
       this.index = index;
+      if (index == 0) {
+        _title = "Palinsesto";
+        _icon = Icons.schedule;
+      } else if (index == 1) {
+        _title = "Cerca";
+        _icon = Icons.search;
+      } else {
+        _title = "Profilo";
+        _icon = Icons.account_circle_outlined;
+      }
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(
+        title: Row(
+          children: [
+            Text(
+              _title,
+              style: const TextStyle(
+                  fontSize: 24, color: Colors.white, letterSpacing: 2),
+            ),
+            const SizedBox(width: 10),
+            Icon(
+              _icon,
+              color: Colors.white,
+            )
+          ],
+        ),
+        centerTitle: false,
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        bottom: PreferredSize(
+          preferredSize: Size.fromHeight(1),
+          child: Divider(
+            thickness: 1,
+            height: 0,
+            color: Color.fromARGB(88, 158, 158, 158),
+          ),
+        ),
+      ),
       resizeToAvoidBottomInset: false,
       backgroundColor: Color(0xff001C38),
       body: pages[index],
