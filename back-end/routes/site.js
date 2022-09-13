@@ -53,7 +53,7 @@ router.get('/script/film', (req, res) => {
 
 router.get('/img/:name', (req, res) => {
     const {name} = req.params
-    res.sendFile(`/Users/rikku/Documents/cinema/back-end/public/img/${name}`)
+    res.sendFile(`/Users/rikku/Documents/cinema/back-end/public/img/locandine/${name}`)
 })
 
 

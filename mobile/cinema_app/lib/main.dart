@@ -1,3 +1,6 @@
+import 'package:cinema_app/palinsesto.dart';
+import 'package:cinema_app/profilo.dart';
+import 'package:cinema_app/ricerca.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(const MyApp());
@@ -21,58 +24,14 @@ class MyStatefulWidget extends StatefulWidget {
 }
 
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
-  int index = 0;
+  int index = 1;
+
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   final pages = [
-    Container(
-      margin: const EdgeInsets.only(top: 60.0, left: 30.0, right: 30),
-      child: Column(
-        children: [
-          Row(
-            children: const [
-              Text('Palinsesto', style: TextStyle(fontSize: 24, color: Colors.white),),
-              SizedBox(width: 10),
-              Icon(Icons.schedule, color: Colors.white,)
-            ],
-          ),
-          const Divider(
-            color: Colors.grey,
-          ),
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              children: const [
-                Image(
-                  image: NetworkImage('https://mr.comingsoon.it/imgdb/locandine/big/50817.jpg'),
-                  height: 500,
-                  width: 300,
-                  fit: BoxFit.fill,
-                ),
-                Image(
-                  image: NetworkImage('https://mr.comingsoon.it/imgdb/locandine/big/50817.jpg'),
-                  height: 500,
-                  width: 300,
-                  fit: BoxFit.fill
-                ),
-                Image(
-                  image: NetworkImage('https://mr.comingsoon.it/imgdb/locandine/big/50817.jpg'),
-                  height: 500,
-                  width: 300,
-                  fit: BoxFit.fill,
-                ),
-              ],
-            ),
-          )
-        ],
-      ),
-    ),
-    const Center(
-      child: Text('cerca'),
-    ),
-    const Center(
-      child: Text('profilo'),
-    )
+    Palinsesto(),
+    Ricerca(),
+    Profilo(),
   ];
 
   void _onItemTapped(int index) {
@@ -84,21 +43,22 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: Color(0xff001C38),
       body: pages[index],
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.schedule),
-            label: 'Home',
+            label: 'Palinsesto',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.search),
-            label: 'Business',
+            label: 'Cerca',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.account_circle_outlined),
-            label: 'School',
+            label: 'Profilo',
           ),
         ],
         currentIndex: this.index,

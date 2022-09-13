@@ -1,11 +1,11 @@
-arguments=--init-script /var/folders/jf/rttthncx2kv5v2w3dkq287_r0000gn/T/init9872020707604620327.gradle --init-script /var/folders/jf/rttthncx2kv5v2w3dkq287_r0000gn/T/init798244030470224287.gradle
+arguments=--init-script /var/folders/jf/rttthncx2kv5v2w3dkq287_r0000gn/T/init9413133367728637055.gradle --init-script /var/folders/jf/rttthncx2kv5v2w3dkq287_r0000gn/T/init1271523800785329445.gradle
 auto.sync=false
 build.scans.enabled=false
 connection.gradle.distribution=GRADLE_DISTRIBUTION(WRAPPER)
 connection.project.dir=
 eclipse.preferences.version=1
 gradle.user.home=
-java.home=/opt/homebrew/Cellar/openjdk/18.0.2/libexec/openjdk.jdk/Contents/Home
+java.home=/Library/Internet Plug-Ins/JavaAppletPlugin.plugin/Contents/Home
 jvm.arguments=
 offline.mode=false
 override.workspace.settings=true
