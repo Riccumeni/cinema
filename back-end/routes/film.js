@@ -29,7 +29,7 @@ router.get('/:name', (req, res) => {
 
 router.get('/search/:name', (req, res) => {
     const {name} = req.params
-    connection.query(`select nome, locandina from film where nome like '${name}%' order by nome`, (err, results) => {
+    connection.query(`select * from film where nome like '${name}%' order by nome`, (err, results) => {
       if(err){
         res.status(500).json({'message': 'errore'})
       }

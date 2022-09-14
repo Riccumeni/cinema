@@ -1,6 +1,6 @@
-import 'package:cinema_app/palinsesto.dart';
-import 'package:cinema_app/profilo.dart';
-import 'package:cinema_app/ricerca.dart';
+import 'package:cinema_app/container/palinsesto.dart';
+import 'package:cinema_app/container/profilo.dart';
+import 'package:cinema_app/container/ricerca.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(const MyApp());
@@ -23,7 +23,7 @@ class MyStatefulWidget extends StatefulWidget {
 }
 
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
-  int index = 2;
+  int index = 0;
   String _title = "Palinsesto";
   var _icon = Icons.schedule;
   static const TextStyle optionStyle =

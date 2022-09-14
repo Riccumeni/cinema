@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:cinema_app/request.dart';
+import 'package:cinema_app/class/request.dart';
 
 class Ricerca extends StatefulWidget {
   const Ricerca({super.key});
@@ -35,7 +35,7 @@ class _RicercaState extends State<Ricerca> {
                           children: [
                             Image(
                               image: NetworkImage(
-                                  'http://localhost:3000/img/${element.locandina}'),
+                                  'http://192.168.1.72:3000/img/${element.locandina}'),
                               height: 80,
                               width: 80,
                               fit: BoxFit.cover,
@@ -48,14 +48,14 @@ class _RicercaState extends State<Ricerca> {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      element.nomefilm,
+                                      element.nome,
                                       style: TextStyle(
-                                          fontSize: 18, color: Colors.white),
+                                          fontSize: 14, color: Colors.white),
                                     ),
                                     Text(
                                       "27/01 - 28/01 ...",
                                       style: TextStyle(
-                                          fontSize: 16, color: Colors.white),
+                                          fontSize: 14, color: Colors.white),
                                     ),
                                   ],
                                 ),
