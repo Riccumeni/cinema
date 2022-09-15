@@ -46,7 +46,7 @@ connection.connect((err) => {
 })
 
 app.get('/api/palinsesto', (req, res) => {
-    connection.query(`select distinct film.locandina, spettacolo.nomefilm 
+    connection.query(`select distinct film.locandina, spettacolo.nomefilm as nome
     from spettacolo, film 
     where spettacolo.nomefilm = film.nome and spettacolo.iniziofilm > current_date;`, (err, results) => {
         res.json(results);

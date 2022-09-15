@@ -1,3 +1,4 @@
+import 'package:cinema_app/container/film.dart';
 import 'package:cinema_app/container/palinsesto.dart';
 import 'package:cinema_app/container/profilo.dart';
 import 'package:cinema_app/container/ricerca.dart';
@@ -29,7 +30,8 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   final pages = [
-    Palinsesto(),
+    // Palinsesto(),
+    FilmW(),
     Ricerca(),
     Profilo(),
   ];

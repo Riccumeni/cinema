@@ -22,8 +22,8 @@ class Request {
   }
 
   Future<List> getRicerca({required String endpoint}) async {
-    final response = await http
-        .get(Uri.parse('http://192.168.1.72:3000/api/film/search/${endpoint}'));
+    final response = await http.get(
+        Uri.parse('http://192.168.1.225:3000/api/film/search/${endpoint}'));
 
     if (response.statusCode == 200) {
       List<Film> spettacoli = [];

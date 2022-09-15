@@ -29,41 +29,51 @@ class _RicercaState extends State<Ricerca> {
 
                     List<Widget> temp2 = [];
                     for (var element in temp) {
-                      temp2.add(Card(
-                        color: Color(0xff002C57),
-                        child: Row(
-                          children: [
-                            Image(
-                              image: NetworkImage(
-                                  'http://192.168.1.72:3000/img/${element.locandina}'),
-                              height: 80,
-                              width: 80,
-                              fit: BoxFit.cover,
-                            ),
-                            Expanded(
-                              child: Container(
-                                margin: EdgeInsets.only(left: 20, right: 20),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      element.nome,
-                                      style: TextStyle(
-                                          fontSize: 14, color: Colors.white),
-                                    ),
-                                    Text(
-                                      "27/01 - 28/01 ...",
-                                      style: TextStyle(
-                                          fontSize: 14, color: Colors.white),
-                                    ),
-                                  ],
+                      temp2.add(
+                        InkWell(
+                          child: Card(
+                            color: Color(0xff002C57),
+                            child: Row(
+                              children: [
+                                Image(
+                                  image: NetworkImage(
+                                      'http://192.168.1.225:3000/img/${element.locandina}'),
+                                  height: 80,
+                                  width: 80,
+                                  fit: BoxFit.cover,
                                 ),
-                              ),
-                            )
-                          ],
+                                Expanded(
+                                  child: Container(
+                                    margin:
+                                        EdgeInsets.only(left: 20, right: 20),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          element.nome,
+                                          style: TextStyle(
+                                              fontSize: 14,
+                                              color: Colors.white),
+                                        ),
+                                        Text(
+                                          "27/01 - 28/01 ...",
+                                          style: TextStyle(
+                                              fontSize: 14,
+                                              color: Colors.white),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                          onTap: () {
+                            print("suu");
+                          },
                         ),
-                      ));
+                      );
                     }
 
                     setState(() {
