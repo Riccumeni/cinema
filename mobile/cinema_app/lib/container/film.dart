@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:cinema_app/class/film.dart';
 
@@ -135,7 +136,7 @@ class _FilmWState extends State<FilmW> {
                           : Colors.transparent,
                       child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: const [
+                          children: [
                             Text(
                               "16:50",
                               style: TextStyle(color: Colors.white),
@@ -144,9 +145,33 @@ class _FilmWState extends State<FilmW> {
                               "2",
                               style: TextStyle(color: Colors.white),
                             ),
-                            Icon(
-                              Icons.list,
-                              color: Colors.white,
+                            InkWell(
+                              child: Icon(
+                                Icons.list,
+                                color: Colors.white,
+                              ),
+                              onTap: () => showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) => Theme(
+                                      data: ThemeData.dark(),
+                                      child: CupertinoAlertDialog(
+                                        title: Text("Uncharted"),
+                                        content: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text("Orario: 16:50"),
+                                            Text("Data: 27/01"),
+                                            Text("Sala: 2"),
+                                            Text("Piano: 1"),
+                                          ],
+                                        ),
+                                        actions: [
+                                          CupertinoDialogAction(
+                                            child: Text("Prenota"),
+                                          )
+                                        ],
+                                      ))),
                             )
                           ]),
                     ),

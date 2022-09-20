@@ -16,8 +16,7 @@ class Palinsesto extends StatelessWidget {
           children: [
             Expanded(
               child: FutureBuilder(
-                future:
-                    req.get(url: 'http://192.168.1.225:3000/api/palinsesto'),
+                future: req.get(url: 'http://localhost:3000/api/palinsesto'),
                 builder: (context, snapshot) {
                   if (snapshot.data != null) {
                     var spettacoli = snapshot.data;
@@ -31,7 +30,7 @@ class Palinsesto extends StatelessWidget {
                                 child: InkWell(
                                   child: Image(
                                     image: NetworkImage(
-                                        'http://192.168.1.225:3000/img/${element.locandina}'),
+                                        'http://localhost:3000/img/${element.locandina}'),
                                     height: 500,
                                     width: 400,
                                     fit: BoxFit.fill,

@@ -37,7 +37,7 @@ class _RicercaState extends State<Ricerca> {
                               children: [
                                 Image(
                                   image: NetworkImage(
-                                      'http://192.168.1.225:3000/img/${element.locandina}'),
+                                      'http://localhost:3000/img/${element.locandina}'),
                                   height: 80,
                                   width: 80,
                                   fit: BoxFit.cover,
