@@ -35,13 +35,18 @@ class Palinsesto extends StatelessWidget {
                                     width: 400,
                                     fit: BoxFit.fill,
                                   ),
-                                  onTap: (() {
-                                    print(element.nome);
+                                  onTap: (() async {
+                                    final response = await req.getFilmSpecs(
+                                        url:
+                                            'http://localhost:3000/api/film/${element.nome}');
+
+                                    print('object');
+
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) => FilmW(
-                                                nomeFilm: element.nome,
+                                                specs: response,
                                               )),
                                     );
                                   }),

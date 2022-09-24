@@ -40,7 +40,7 @@ export const login = async (req, res) => {
                     nome = results[0]["nome"];
                     res.cookie('id', id)
                     res.cookie('name', nome)
-                    res.json({"success" : true})
+                    res.json({"success" : true, 'id' : id, 'nome' : nome,})
                 }else{
                     res.status(200).json({"message" : "credenziali non corrette"})
                 }  

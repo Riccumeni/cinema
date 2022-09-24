@@ -1,16 +1,27 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:cinema_app/class/film.dart';
+import 'package:cinema_app/class/request.dart';
 
 class FilmW extends StatefulWidget {
-  const FilmW({super.key, nomeFilm});
+  final Film specs;
+
+  const FilmW({super.key, required this.specs});
 
   @override
-  State<FilmW> createState() => _FilmWState();
+  State<FilmW> createState() => _FilmWState(film: specs);
 }
 
 class _FilmWState extends State<FilmW> {
   List<bool> isPressed = [false, false, false];
+  Request req = new Request();
+
+  final Film film;
+
+  List<Widget> spettacoli = [];
+
+  _FilmWState({required this.film});
+
   @override
   Widget build(BuildContext context) {
     int _selectedIndex = -1;
@@ -23,7 +34,7 @@ class _FilmWState extends State<FilmW> {
               decoration: BoxDecoration(
                   image: DecorationImage(
                       image: NetworkImage(
-                          'https://mr.comingsoon.it/imgdb/locandine/big/50817.jpg'),
+                          'http://localhost:3000/img/${film.locandina}'),
                       fit: BoxFit.fitWidth)),
             ),
             backgroundColor: Colors.blue,
@@ -36,7 +47,7 @@ class _FilmWState extends State<FilmW> {
           children: [
             Text(
               textAlign: TextAlign.center,
-              "Uncharted",
+              "${film.nome}",
               style: TextStyle(color: Colors.white, fontSize: 28),
             ),
             Container(
@@ -48,7 +59,7 @@ class _FilmWState extends State<FilmW> {
               ),
             ),
             Text(
-              "I fratelli Nathan e Sam Drake vengono catturati dalla sicurezza per aver cercato di rubare la prima mappa realizzata dopo la spedizione di Magellano. Poiché questo è il terzo reato di Sam, l'orfanotrofio che ospita entrambi i ragazzi butta fuori Sam e lo costringe a stare altrove, lontano da Nate. Prima di andarsene, Sam promette al fratellino che tornerà a prenderlo, lasciandogli un anello appartenente al loro antenato sir Francis Drake, con la scritta Sic Parvis Magna (Da umili origini a grandi imprese).",
+              "${film.trama}",
               style: TextStyle(color: Colors.white),
             ),
             Container(
@@ -64,36 +75,129 @@ class _FilmWState extends State<FilmW> {
                 width: 200,
                 height: 50,
                 color: Color(0xff002C57),
-                child: ListView(
-                    scrollDirection: Axis.horizontal,
-                    shrinkWrap: true,
-                    children: [
-                      for (int i = 0; i < 3; i++)
-                        InkWell(
-                          child: Container(
-                            child: Center(
-                              child: Text("${i + 27}/01  ",
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold)),
-                            ),
-                            decoration: BoxDecoration(
-                                border: Border(
-                                    bottom: BorderSide(
-                                        color: isPressed[i]
-                                            ? Colors.white
-                                            : Colors.transparent))),
-                          ),
-                          onTap: () => {
-                            setState(() {
-                              for (int j = 0; j < isPressed.length; j++) {
-                                isPressed[j] = false;
-                              }
-                              isPressed[i] = !isPressed[i];
-                            })
-                          },
-                        ),
-                    ])),
+                child: FutureBuilder(
+                    future: req.getDate(nome: film.nome),
+                    builder: ((context, snapshot) {
+                      if (snapshot.data != null) {
+                        return ListView(
+                            scrollDirection: Axis.horizontal,
+                            shrinkWrap: true,
+                            children: [
+                              for (int i = 0; i < snapshot.data.length; i++)
+                                InkWell(
+                                  child: Container(
+                                    child: Center(
+                                      child: Text(
+                                          "${snapshot.data[i]['day']}/${snapshot.data[i]['month']}  ",
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.bold)),
+                                    ),
+                                    decoration: BoxDecoration(
+                                        border: Border(
+                                            bottom: BorderSide(
+                                                color: isPressed[i]
+                                                    ? Colors.white
+                                                    : Colors.transparent))),
+                                  ),
+                                  onTap: () => {
+                                    setState(() {
+                                      spettacoli.clear();
+                                      int k = 0;
+                                      film.spettacoli.forEach((element) {
+                                        if (element.day ==
+                                                snapshot.data[i]['day']
+                                                    .toString() &&
+                                            element.month ==
+                                                snapshot.data[i]['month']
+                                                    .toString()) {
+                                          spettacoli.add(
+                                            Container(
+                                              padding: EdgeInsets.only(
+                                                  top: 5,
+                                                  left: 5,
+                                                  right: 20,
+                                                  bottom: 5),
+                                              margin: EdgeInsets.only(),
+                                              color: k % 2 == 0
+                                                  ? Color.fromARGB(
+                                                      149, 18, 74, 119)
+                                                  : Colors.transparent,
+                                              child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    Text(
+                                                      "${element.hour}:${element.minute}",
+                                                      style: TextStyle(
+                                                          color: Colors.white),
+                                                    ),
+                                                    Text(
+                                                      "${element.codiceSala}",
+                                                      style: TextStyle(
+                                                          color: Colors.white),
+                                                    ),
+                                                    InkWell(
+                                                      child: Icon(
+                                                        Icons.list,
+                                                        color: Colors.white,
+                                                      ),
+                                                      onTap: () => showDialog(
+                                                          context: context,
+                                                          builder: (BuildContext
+                                                                  context) =>
+                                                              Theme(
+                                                                  data: ThemeData
+                                                                      .dark(),
+                                                                  child:
+                                                                      CupertinoAlertDialog(
+                                                                    title: Text(
+                                                                        "${film.nome}"),
+                                                                    content:
+                                                                        Column(
+                                                                      crossAxisAlignment:
+                                                                          CrossAxisAlignment
+                                                                              .start,
+                                                                      children: [
+                                                                        Text(
+                                                                            "Orario: ${element.hour}:${element.minute}"),
+                                                                        Text(
+                                                                            "Data: ${element.day}/${element.month}"),
+                                                                        Text(
+                                                                            "Sala: ${element.codiceSala}"),
+                                                                        Text(
+                                                                            "Posti Disponibili: ${element.postiDisponibili}")
+                                                                      ],
+                                                                    ),
+                                                                    actions: [
+                                                                      CupertinoDialogAction(
+                                                                        child: Text(
+                                                                            "Prenota"),
+                                                                      )
+                                                                    ],
+                                                                  ))),
+                                                    )
+                                                  ]),
+                                            ),
+                                          );
+                                          k++;
+                                        }
+                                      });
+                                      for (int j = 0;
+                                          j < isPressed.length;
+                                          j++) {
+                                        isPressed[j] = false;
+                                      }
+                                      isPressed[i] = !isPressed[i];
+                                      print(spettacoli.length);
+                                    })
+                                  },
+                                ),
+                            ]);
+                      }
+                      return Text("suu");
+                    }))),
             Container(
               padding: EdgeInsets.all(10),
               child: Column(
@@ -126,55 +230,7 @@ class _FilmWState extends State<FilmW> {
                           ),
                         ]),
                   ),
-                  for (int i = 0; i < 5; i++)
-                    Container(
-                      padding: EdgeInsets.only(
-                          top: 5, left: 5, right: 20, bottom: 5),
-                      margin: EdgeInsets.only(),
-                      color: i % 2 == 0
-                          ? Color.fromARGB(149, 18, 74, 119)
-                          : Colors.transparent,
-                      child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              "16:50",
-                              style: TextStyle(color: Colors.white),
-                            ),
-                            Text(
-                              "2",
-                              style: TextStyle(color: Colors.white),
-                            ),
-                            InkWell(
-                              child: Icon(
-                                Icons.list,
-                                color: Colors.white,
-                              ),
-                              onTap: () => showDialog(
-                                  context: context,
-                                  builder: (BuildContext context) => Theme(
-                                      data: ThemeData.dark(),
-                                      child: CupertinoAlertDialog(
-                                        title: Text("Uncharted"),
-                                        content: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text("Orario: 16:50"),
-                                            Text("Data: 27/01"),
-                                            Text("Sala: 2"),
-                                            Text("Piano: 1"),
-                                          ],
-                                        ),
-                                        actions: [
-                                          CupertinoDialogAction(
-                                            child: Text("Prenota"),
-                                          )
-                                        ],
-                                      ))),
-                            )
-                          ]),
-                    ),
+                  for (var element in spettacoli) element,
                 ],
               ),
             ),

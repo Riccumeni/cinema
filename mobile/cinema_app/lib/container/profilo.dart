@@ -57,6 +57,17 @@ class Profilo extends StatelessWidget {
             ),
           ),
           Container(
+            margin: EdgeInsets.only(bottom: 20),
+            width: 200,
+            height: 50,
+            child: ElevatedButton(
+                onPressed: () {},
+                child: Text(
+                  "Login",
+                  style: TextStyle(fontSize: 24),
+                )),
+          ),
+          Container(
             child: Text(
               "Hai dimenticato la password?",
               style: TextStyle(

@@ -1,4 +1,5 @@
 import 'package:cinema_app/class/spettacolo.dart';
+import 'package:cinema_app/class/request.dart';
 
 class Film {
   final String? nome;
@@ -6,7 +7,10 @@ class Film {
   final String? trama;
   final String? locandina;
   final String? trailer;
+  List? date;
   var spettacoli = [];
+
+  Request req = new Request();
 
   Film({this.locandina, this.nome, this.trama, this.genere, this.trailer});
 
@@ -25,8 +29,10 @@ class Film {
           codiceSala: value['codicesala'],
           codiceSpettacolo: value['codice'],
           nomeFilm: value['nomefilm'],
-          inizioFilm: value['iniziofilm'],
-          fineFilm: value['finefilm'],
+          month: value['month'].toString(),
+          day: value['day'].toString(),
+          hour: value['hour'].toString(),
+          minute: value['minute'].toString(),
           numeroPosti: value['numeroposti'],
           postiDisponibili: value['postidisponibili']));
     }

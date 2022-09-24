@@ -2,8 +2,10 @@ class Spettacolo {
   final int? codiceSala;
   final int? codiceSpettacolo;
   final String? nomeFilm;
-  final String? inizioFilm;
-  final String? fineFilm;
+  final String? day;
+  final String? month;
+  final String? hour;
+  final String? minute;
   final int? numeroPosti;
   final int? postiDisponibili;
 
@@ -11,8 +13,10 @@ class Spettacolo {
       {this.codiceSala,
       this.codiceSpettacolo,
       this.nomeFilm,
-      this.inizioFilm,
-      this.fineFilm,
+      this.day,
+      this.hour,
+      this.minute,
+      this.month,
       this.numeroPosti,
       this.postiDisponibili});
 }

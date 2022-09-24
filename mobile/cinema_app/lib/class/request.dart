@@ -61,4 +61,13 @@ class Request {
       throw Exception('Failed to load album');
     }
   }
+
+  Future<dynamic> getDate({String? nome}) async {
+    final response = await http.get(Uri.parse(
+        "http://localhost:3000/api/film/spettacoli/getAllDate/${nome}"));
+
+    var date = jsonDecode(response.body);
+
+    return date;
+  }
 }

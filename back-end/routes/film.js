@@ -9,7 +9,7 @@ router.get('/:name', (req, res) => {
     const nameWithoutDash = name.replace('-', ' ');
     
     connection.query(`select * from film where nome like '${nameWithoutDash}';
-    select sala.codice as 'codicesala', spettacolo.codice, spettacolo.nomefilm, spettacolo.iniziofilm, spettacolo.finefilm, sala.numeroposti, sala.numeroposti - count(prenotazione.codiceutente)  as "postidisponibili"
+    select sala.codice as 'codicesala', spettacolo.codice, spettacolo.nomefilm, MONTH(spettacolo.iniziofilm) as 'month', DAY(spettacolo.iniziofilm) as 'day', HOUR(spettacolo.iniziofilm) as 'hour', MINUTE(spettacolo.iniziofilm) as 'minute', sala.numeroposti, sala.numeroposti - count(prenotazione.codiceutente)  as "postidisponibili"
     from prenotazione
     right join spettacolo on prenotazione.codicespettacolo = spettacolo.codice
     inner join sala on sala.codice = spettacolo.codicesala
@@ -65,6 +65,17 @@ router.get('/spettacoli/getDate/:nome', (req, res) => {
     const {nome} = req.params
     console.log(nome);
     connection.query(`select DAY(spettacolo.iniziofilm) as 'day', MONTH(spettacolo.iniziofilm) as 'month' from spettacolo where spettacolo.nomefilm = '${nome}' and spettacolo.iniziofilm > current_date limit 3`, (err, results) => {
+        if(err){
+            res.status(500)
+        }
+        res.json(results)
+    })
+})
+
+router.get('/spettacoli/getAllDate/:nome', (req, res) => {
+    const {nome} = req.params
+    console.log(nome);
+    connection.query(`select distinct DAY(spettacolo.iniziofilm) as 'day', MONTH(spettacolo.iniziofilm) as 'month' from spettacolo where spettacolo.nomefilm = '${nome}' and spettacolo.iniziofilm > current_date`, (err, results) => {
         if(err){
             res.status(500)
         }

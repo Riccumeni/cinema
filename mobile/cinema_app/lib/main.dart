@@ -25,7 +25,6 @@ class MyStatefulWidget extends StatefulWidget {
 
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   int index = 0;
-  String _title = "Palinsesto";
   var _icon = Icons.schedule;
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
@@ -38,16 +37,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   void _onItemTapped(int index) {
     setState(() {
       this.index = index;
-      if (index == 0) {
-        _title = "Palinsesto";
-        _icon = Icons.schedule;
-      } else if (index == 1) {
-        _title = "Cerca";
-        _icon = Icons.search;
-      } else {
-        _title = "Profilo";
-        _icon = Icons.account_circle_outlined;
-      }
     });
   }
 
