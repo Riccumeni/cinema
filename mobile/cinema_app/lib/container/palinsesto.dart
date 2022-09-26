@@ -10,54 +10,102 @@ class Palinsesto extends StatelessWidget {
   Widget build(BuildContext context) {
     Request req = new Request();
 
-    return Container(
-        margin: const EdgeInsets.only(top: 60.0, left: 30.0, right: 30),
-        child: Column(
+    ScrollController sc = new ScrollController();
+
+    sc.addListener(
+      () {
+        print(sc.offset);
+      },
+    );
+
+    return Scaffold(
+      extendBodyBehindAppBar: true,
+      resizeToAvoidBottomInset: false,
+      appBar: AppBar(
+        title: Row(
           children: [
-            Expanded(
-              child: FutureBuilder(
-                future: req.get(url: 'http://localhost:3000/api/palinsesto'),
-                builder: (context, snapshot) {
-                  if (snapshot.data != null) {
-                    var spettacoli = snapshot.data;
-                    return ListView(
-                        padding: EdgeInsets.all(60),
-                        scrollDirection: Axis.horizontal,
-                        children: [
-                          for (var element in spettacoli!)
-                            Container(
-                                padding: EdgeInsets.only(right: 40),
-                                child: InkWell(
-                                  child: Image(
-                                    image: NetworkImage(
-                                        'http://localhost:3000/img/${element.locandina}'),
-                                    height: 500,
-                                    width: 400,
-                                    fit: BoxFit.fill,
-                                  ),
-                                  onTap: (() async {
-                                    final response = await req.getFilmSpecs(
-                                        url:
-                                            'http://localhost:3000/api/film/${element.nome}');
-
-                                    print('object');
-
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => FilmW(
-                                                specs: response,
-                                              )),
-                                    );
-                                  }),
-                                )),
-                        ]);
-                  }
-                  return CircularProgressIndicator();
-                },
-              ),
+            Text(
+              "Palinsesto",
+              style: const TextStyle(
+                  fontSize: 24, color: Colors.white, letterSpacing: 2),
             ),
+            const SizedBox(width: 10),
+            Icon(
+              Icons.schedule,
+              color: Colors.white,
+            )
           ],
-        ));
+        ),
+        centerTitle: false,
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        bottom: PreferredSize(
+          preferredSize: Size.fromHeight(1),
+          child: Divider(
+            thickness: 1,
+            height: 0,
+            color: Color.fromARGB(88, 158, 158, 158),
+          ),
+        ),
+      ),
+      backgroundColor: Color(0xff001C38),
+      body: Container(
+          margin: const EdgeInsets.only(top: 120.0, left: 30.0, right: 30),
+          child: Column(
+            children: [
+              Expanded(
+                child: FutureBuilder(
+                  future: req.get(url: 'http://localhost:3000/api/palinsesto'),
+                  builder: (context, snapshot) {
+                    if (snapshot.data != null) {
+                      var spettacoli = snapshot.data;
+                      return ListView(
+                          controller: sc,
+                          padding: EdgeInsets.all(60),
+                          scrollDirection: Axis.horizontal,
+                          children: [
+                            for (var element in spettacoli!)
+                              Container(
+                                  width: 350,
+                                  margin: EdgeInsets.only(right: 40),
+                                  decoration: BoxDecoration(boxShadow: [
+                                    BoxShadow(
+                                        color: Colors.blue.withOpacity(0.5),
+                                        spreadRadius: 5,
+                                        blurRadius: 7,
+                                        offset: Offset(0, 3)),
+                                  ]),
+                                  child: InkWell(
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(12),
+                                      child: Image(
+                                        image: NetworkImage(
+                                            'http://localhost:3000/img/${element.locandina}'),
+                                        fit: BoxFit.fill,
+                                      ),
+                                    ),
+                                    onTap: (() async {
+                                      final response = await req.getFilmSpecs(
+                                          url:
+                                              'http://localhost:3000/api/film/${element.nome}');
+
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => FilmW(
+                                                  specs: response,
+                                                )),
+                                      );
+                                    }),
+                                  )),
+                          ]);
+                    }
+                    return CircularProgressIndicator();
+                  },
+                ),
+              ),
+            ],
+          )),
+    );
   }
 }

@@ -237,14 +237,14 @@ class _FilmWState extends State<FilmW> {
           ],
         ),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.startTop,
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.arrow_back),
-        onPressed: () {
-          Navigator.pop(context);
-        },
-        backgroundColor: Color(0xff002C57),
-      ),
+      // floatingActionButtonLocation: FloatingActionButtonLocation.startTop,
+      // floatingActionButton: FloatingActionButton(
+      //   child: Icon(Icons.arrow_back),
+      //   onPressed: () {
+      //     Navigator.pop(context);
+      //   },
+      //   backgroundColor: Color(0xff002C57),
+      // ),
     );
   }
 }

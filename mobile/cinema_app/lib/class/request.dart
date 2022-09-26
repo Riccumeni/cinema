@@ -1,5 +1,6 @@
 import 'package:http/http.dart' as http;
 import 'package:cinema_app/class/film.dart';
+import 'package:cinema_app/class/globals.dart' as globals;
 import 'dart:convert';
 
 class Request {
@@ -69,5 +70,18 @@ class Request {
     var date = jsonDecode(response.body);
 
     return date;
+  }
+
+  Future<dynamic> login(
+      {required String email, required String password}) async {
+    final response = await http.post(
+        Uri.parse("http://localhost:3000/auth/login"),
+        body: {'email': email, 'password': password});
+
+    var res = jsonDecode(response.body);
+
+    if (res['success']) {
+      globals.id = res['id'];
+    }
   }
 }

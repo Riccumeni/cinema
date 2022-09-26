@@ -1,6 +1,6 @@
 import 'package:cinema_app/container/film.dart';
 import 'package:cinema_app/container/palinsesto.dart';
-import 'package:cinema_app/container/profilo.dart';
+import 'package:cinema_app/container/login.dart';
 import 'package:cinema_app/container/ricerca.dart';
 import 'package:flutter/material.dart';
 
@@ -31,7 +31,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   final pages = [
     Palinsesto(),
     Ricerca(),
-    Profilo(),
+    Login(),
   ];
 
   void _onItemTapped(int index) {
@@ -44,33 +44,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
-      // appBar: AppBar(
-      //   title: Row(
-      //     children: [
-      //       Text(
-      //         _title,
-      //         style: const TextStyle(
-      //             fontSize: 24, color: Colors.white, letterSpacing: 2),
-      //       ),
-      //       const SizedBox(width: 10),
-      //       Icon(
-      //         _icon,
-      //         color: Colors.white,
-      //       )
-      //     ],
-      //   ),
-      //   centerTitle: false,
-      //   backgroundColor: Colors.transparent,
-      //   elevation: 0,
-      //   bottom: PreferredSize(
-      //     preferredSize: Size.fromHeight(1),
-      //     child: Divider(
-      //       thickness: 1,
-      //       height: 0,
-      //       color: Color.fromARGB(88, 158, 158, 158),
-      //     ),
-      //   ),
-      // ),
+
       resizeToAvoidBottomInset: false,
       backgroundColor: Color(0xff001C38),
       body: pages[index],
